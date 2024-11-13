@@ -18,6 +18,7 @@ from datetime import datetime
 #                             format='%(asctime)s - %(message)s')
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+# logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 
 def fetch_solana_tokens_from_registry():
@@ -222,7 +223,7 @@ def main():
                 logging.info("Tokens that meet the RSI conditions:")
                 for result in results:
                     logging.info(
-                        f"Symbol: {result[0]}, Current RSI: {result[1]}")
+                        f"Symbol: **{result[0]}**, Current RSI: {result[1]}")
             else:
                 logging.info(
                     "No tokens meet the RSI conditions at this time.")

@@ -84,28 +84,33 @@ def main():
         logging.info(f"Total Symbols: {total_symbols}")
 
         matching_tokens = []
-        for i, token in enumerate(tokens):
-            logging.info(f"Processing {token} ({i + 1}/{total_symbols})...")
+        try:
+            for i, token in enumerate(tokens):
+                logging.info(
+                    f"Processing {token} ({i + 1}/{total_symbols})...")
 
-            df = fetch_ohlcv(token, selected_timeframe)
-            meets_condition, current_rsi = check_rsi_conditions(df, lookback)
+                df = fetch_ohlcv(token, selected_timeframe)
+                meets_condition, current_rsi = check_rsi_conditions(
+                    df, lookback)
 
-            if meets_condition:
-                matching_tokens.append((token, current_rsi))
+                if meets_condition:
+                    matching_tokens.append((token, current_rsi))
+        except KeyboardInterrupt:
+            print("\nScanning interrupted by user.")
+        finally:
+            end_time = datetime.now()
+            logging.info(f"\nScanning completed. (End time: {end_time})")
+            logging.info(f"Total running time: {end_time - start_time}")
 
-        end_time = datetime.now()
-        logging.info(f"\nScanning completed. (End time: {end_time})")
-        logging.info(f"Total running time: {end_time - start_time}")
+            print("\nTokens that meet the criteria:")
+            for matching_token, rsi_value in matching_tokens:
+                print(f"{matching_token} - Current RSI: {rsi_value}")
 
-        print("\nTokens that meet the criteria:")
-        for matching_token, rsi_value in matching_tokens:
-            print(f"{matching_token} - Current RSI: {rsi_value}")
-
-        another_scan = input(
-            "Do you want to do another scan? (Y/n): ").strip().lower()
-        if another_scan != 'y':
-            print("Exiting...")
-            break
+            another_scan = input(
+                "Do you want to do another scan? (Y/n): ").strip().lower()
+            if another_scan != 'y':
+                print("Exiting...")
+                break
 
 
 if __name__ == "__main__":

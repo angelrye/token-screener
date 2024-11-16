@@ -1,13 +1,21 @@
 import re
 import ccxt
 import requests
+import time
 
 
 def get_exchange_tokens(exchange):
-    markets = exchange.fetch_markets()
-    tokens = [market['symbol']
-              for market in markets if market['quote'] == 'USDT']
-    return tokens
+    for _ in range(5):  # Retry up to 5 times
+        try:
+            markets = exchange.fetch_markets()
+            tokens = [market['symbol']
+                      for market in markets if market['quote'] == 'USDT']
+            return tokens
+        except ccxt.RequestTimeout as e:
+            print(f"Request timed out: {e}. Retrying...")
+            time.sleep(5)  # Wait for 5 seconds before retrying
+    raise Exception(
+        "Failed to fetch markets from exchange after multiple retries")
 
 
 def fetch_all_tokens():
@@ -29,7 +37,6 @@ def fetch_solana_tokens_from_registry():
     ) + '/USDT' for token in data['tokens']]
 
     excluded_pattern = re.compile(r'.*-.*-.*-[CP]$')
-
     solana_tokens = [
         symbol for symbol in solana_tokens if not excluded_pattern.search(symbol)]
 
@@ -61,7 +68,6 @@ def get_chain_platform(chain_name):
 
 
 def get_tokens(exchange, chain_name):
-
     filtered_tokens = []
 
     if chain_name == "solana":

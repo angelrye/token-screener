@@ -79,10 +79,14 @@ def main():
             continue
 
         start_time = datetime.now()
-        print(f"\nScanning tokens... (Start time: {start_time})")
+        logging.info(f"\nScanning tokens... (Start time: {start_time})")
+        total_symbols = len(tokens)
+        logging.info(f"Total Symbols: {total_symbols}")
+
         matching_tokens = []
-        for token in tokens:
-            print(f"Scanning {token}...", end='\r')
+        for i, token in enumerate(tokens):
+            logging.info(f"Processing {token} ({i + 1}/{total_symbols})...")
+
             df = fetch_ohlcv(token, selected_timeframe)
             meets_condition, current_rsi = check_rsi_conditions(df, lookback)
 
@@ -90,15 +94,16 @@ def main():
                 matching_tokens.append((token, current_rsi))
 
         end_time = datetime.now()
-        print(f"\nScanning completed. (End time: {end_time})")
+        logging.info(f"\nScanning completed. (End time: {end_time})")
+        logging.info(f"Total running time: {end_time - start_time}")
 
         print("\nTokens that meet the criteria:")
         for matching_token, rsi_value in matching_tokens:
             print(f"{matching_token} - Current RSI: {rsi_value}")
 
         another_scan = input(
-            "Do you want to do another scan? (yes/no): ").strip().lower()
-        if another_scan != 'yes':
+            "Do you want to do another scan? (Y/n): ").strip().lower()
+        if another_scan != 'y':
             print("Exiting...")
             break
 

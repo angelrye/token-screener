@@ -103,7 +103,8 @@ def main():
             logging.info(f"\nScanning completed. (End time: {end_time})")
             logging.info(f"Total running time: {end_time - start_time}")
 
-            print(f"\nTokens that meet the criteria for : {chain_choice}")
+            print(
+                f"\nTokens that meet the criteria for : {selected_chain} Chain")
             for matching_token, rsi_value in matching_tokens:
                 print(f"{matching_token}\t- Current RSI: {rsi_value:.2f}")
 

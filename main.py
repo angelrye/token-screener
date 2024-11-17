@@ -7,7 +7,8 @@ from token_list import get_binance_tokens, get_bybit_tokens
 from ohlcv import fetch_ohlcv
 from rsi import check_rsi_conditions
 
-logging.basicConfig(level=logging.INFO)
+# Custom logging format
+logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 
 def get_top_brokers():
@@ -102,15 +103,14 @@ def main():
             logging.info(f"\nScanning completed. (End time: {end_time})")
             logging.info(f"Total running time: {end_time - start_time}")
 
-            print("\nTokens that meet the criteria:")
+            print(f"\nTokens that meet the criteria for : {chain_names}")
             for matching_token, rsi_value in matching_tokens:
-                print(f"{matching_token} - Current RSI: {rsi_value}")
+                print(f"{matching_token}\t- Current RSI: {rsi_value:.2f}")
 
             another_scan = input(
                 "Do you want to do another scan? (Y/n): ").strip().lower()
             if another_scan != 'y':
                 print("Exiting...")
-                break
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ def check_rsi_conditions(df, recent_period=10):
         return False, None
 
     recent_rsi_touch = (df.tail(recent_period)['rsi'] >= 70).any()
-    current_rsi = df.iloc[-1]['rsi']
+    current_rsi = round(df.iloc[-1]['rsi'], 2)  # Format to two decimal places
 
     if recent_rsi_touch and 40 < current_rsi < 60:
         return True, current_rsi

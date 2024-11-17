@@ -35,6 +35,10 @@ Ensure Dependencies: Make sure the required libraries (ccxt, requests, pandas, t
 bash
 python -m venv myenv
 source myenv/bin/activate  # On Windows, use `myenv\Scripts\activate`
+
+# for windows
+cd myenv\Scripts -> Hit Enter
+activate -> Hit Enter
 ```
 
 2. Create a requirements.txt file with the following content:

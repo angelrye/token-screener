@@ -41,7 +41,7 @@ cd myenv\Scripts -> Hit Enter
 activate -> Hit Enter
 ```
 
-2. Create a requirements.txt file with the following content:
+2. Create a requirements.txt file with the following content: - **You can skip this since file is already included.**
 
 ```
 ccxt
@@ -49,6 +49,7 @@ requests
 pandas
 ta
 logging
+
 ```
 3. Install the required libraries:
 ```

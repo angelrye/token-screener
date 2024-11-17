@@ -69,6 +69,8 @@ bash
 python main.py
 ```
 
+![How to run in windows](image.png)
+
 3. Follow the Prompts:
 - Select a broker from the list of supported brokers.
 - Select a cryptocurrency chain from the list of top chains.

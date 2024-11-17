@@ -37,6 +37,9 @@ python -m venv myenv
 source myenv/bin/activate  # On Windows, use `myenv\Scripts\activate`
 
 # for windows
+# Open command prompt and go to the directory where you saved this script.
+# once inside the code perform below actions
+
 cd myenv\Scripts -> Hit Enter
 activate -> Hit Enter
 ```

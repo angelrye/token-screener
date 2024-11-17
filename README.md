@@ -82,3 +82,6 @@ python main.py
 
 ## Logging
 The script uses a custom logging format to provide detailed information about the scanning process, including the start time, end time, total number of symbols, and progress through the tokens being scanned.
+
+## NOTES
+Currently, Bybit is the only working broker. Will continue to add more in the future.
